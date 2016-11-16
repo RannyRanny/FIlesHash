@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace FilesHash
 {
-    class Program
+    struct ConsumerData
     {
-        static void Main(string[] args)
+        public string FilePath { get; set; }
+
+        public ConsumerData(string path)
         {
-                    
+            FilePath = path;
         }
     }
 }

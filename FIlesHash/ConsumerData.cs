@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FilesHash
+﻿namespace FilesHash
 {
-    struct ConsumerData
+    class ConsumerData
     {
         public string FilePath { get; set; }
 
@@ -14,5 +8,9 @@ namespace FilesHash
         {
             FilePath = path;
         }
-    }
+		public override string ToString()
+		{
+			return FilePath;
+		}
+	}
 }

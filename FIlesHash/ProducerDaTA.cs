@@ -1,6 +1,6 @@
 ﻿namespace FilesHash
 {
-    struct ProducerData
+    class ProducerData
     {
         public string FilePath { get; set; }
 

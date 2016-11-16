@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FilesHash
 {
     class HashConsumer
     {
-        public void Consume(ConsumerData data, SQLite.SQLiteConnection connection)
+        public void Consume(ConsumerData data, OracleConnection connection)
         {
             using (MD5 md5Hash = MD5.Create())
             {
                 string hash = GetMd5Hash(md5Hash, data.FilePath);
-                connection.Insert(new Hash(data.FilePath, hash));
+
+				Console.WriteLine(data.FilePath + "       " + hash);
+				//write in db here
             }
         }
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-            return Encoding.Default.GetString(data);
-        }
+			return BitConverter.ToString(data);
+		}
 
     }
 }

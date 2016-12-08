@@ -8,9 +8,10 @@
         {
             FilePath = path;
         }
-		public override string ToString()
-		{
-			return FilePath;
-		}
-	}
+
+        public override string ToString()
+        {
+            return FilePath;
+        }
+    }
 }

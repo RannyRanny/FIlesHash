@@ -11,18 +11,22 @@ namespace FilesHash
         {
             using (MD5 md5Hash = MD5.Create())
             {
-                string hash = GetMd5Hash(md5Hash, data.FilePath);
+                string hash = this.GetMd5Hash(md5Hash, data.FilePath);
 
-				Console.WriteLine(data.FilePath + "       " + hash);
-				//write in db here
+                Console.WriteLine(data.FilePath + "       " + hash);
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = connection;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText= "INSERT INTO HASHES (FILENAME, FILEHASH) VALUES('"+data.ToString()+"', '"+hash+"')";
+                cmd.ExecuteNonQuery();
+
             }
         }
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-			return BitConverter.ToString(data);
-		}
-
+            return BitConverter.ToString(data);
+        }
     }
 }
